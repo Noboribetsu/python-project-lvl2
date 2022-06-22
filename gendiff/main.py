@@ -1,13 +1,6 @@
 """Main file with function"""
-
 import argparse
-import json
-
-
-def to_json(value):
-    if isinstance(value, bool):
-        return str(value).lower()
-    return value
+from gendiff.functions import compare, parse_file
 
 
 def generate_diff(first_path, second_path):
@@ -15,31 +8,11 @@ def generate_diff(first_path, second_path):
     The fucntion compares two configuration files and shows a difference.
     """
     diff = []
-    first_file = json.load(open(first_path))
-    second_file = json.load(open(second_path))
-    keys_diff = second_file.keys() - first_file.keys()
-    keys = list(first_file.keys())
-    keys.extend(keys_diff)
-    keys = sorted(keys)
-    for key in keys:
-        if key in first_file and key in second_file:
-            if first_file[key] == second_file[key]:
-                diff.append('    {0}: {1}'.format(
-                    key, to_json(first_file[key])
-                )
-                )
-            else:
-                diff.append('  - {0}: {1}'.format(
-                    key, to_json(first_file[key])
-                ))
-                diff.append('  + {0}: {1}'.format(
-                    key, to_json(second_file[key])
-                ))
-            continue
-        elif key in first_file:
-            diff.append('  - {0}: {1}'.format(key, to_json(first_file[key])))
-        elif key in second_file:
-            diff.append('  + {0}: {1}'.format(key, to_json(second_file[key])))
+    dict_1 = parse_file(first_path)
+    dict_2 = parse_file(second_path)
+    keys_diff = dict_2.keys() - dict_1.keys()
+    keys = list(dict_1.keys()) + list(keys_diff)
+    diff = list(map(lambda x: compare(x, dict_1, dict_2), sorted(keys)))
     return '{{\n{0}\n}}'.format('\n'.join(diff))
 
 
