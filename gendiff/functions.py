@@ -23,11 +23,8 @@ def compare(key, first_file, second_file):
         if key in second_file:
             if first_file[key] == second_file[key]:
                 return '    {0}: {1}'.format(key, to_low(first_file[key]))
-            else:
-                return '  - {0}: {1}\n  + {0}: {2}'.format(
-                    key, to_low(first_file[key]), to_low(second_file[key])
-                )
-        else:
-            return '  - {0}: {1}'.format(key, to_low(first_file[key]))
-    else:
-        return ('  + {0}: {1}'.format(key, to_low(second_file[key])))
+            return '  - {0}: {1}\n  + {0}: {2}'.format(
+                key, to_low(first_file[key]), to_low(second_file[key])
+            )
+        return '  - {0}: {1}'.format(key, to_low(first_file[key]))
+    return ('  + {0}: {1}'.format(key, to_low(second_file[key])))
