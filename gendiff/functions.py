@@ -2,6 +2,7 @@ import json
 import yaml
 from yaml.loader import SafeLoader
 
+
 def to_low(value):
     if isinstance(value, bool):
         return str(value).lower()
