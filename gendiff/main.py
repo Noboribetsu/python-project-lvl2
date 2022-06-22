@@ -29,8 +29,12 @@ def generate_diff(first_path, second_path):
                 )
                 )
             else:
-                diff.append('  - {0}: {1}'.format(key, to_json(first_file[key])))
-                diff.append('  + {0}: {1}'.format(key, to_json(second_file[key])))
+                diff.append('  - {0}: {1}'.format(
+                    key, to_json(first_file[key])
+                ))
+                diff.append('  + {0}: {1}'.format(
+                    key, to_json(second_file[key])
+                ))
             continue
         elif key in first_file:
             diff.append('  - {0}: {1}'.format(key, to_json(first_file[key])))
