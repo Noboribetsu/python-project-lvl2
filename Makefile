@@ -12,7 +12,13 @@ package-install:
 
 lint:
 	poetry run flake8 gendiff
-	
+
+test:
+	poetry run pytest
+
+test-coverage:
+	poetry run pytest --cov=gendiff
+
 package-uninstall:
 	python3 -m pip uninstall  dist/*.whl
 

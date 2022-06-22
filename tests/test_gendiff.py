@@ -1,8 +1,8 @@
 from gendiff import generate_diff
 import subprocess
 
-first_file = '/home/vladimir/python-project-lvl2/tests/fixtures/file1.json'
-second_file = '/home/vladimir/python-project-lvl2/tests/fixtures/file2.json'
+first_file = 'tests/fixtures/file1.json'
+second_file = 'tests/fixtures/file2.json'
 result_path = 'tests/fixtures/result'
 
 
