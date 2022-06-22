@@ -17,7 +17,7 @@ test:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest --cov=gendiff
+	poetry run pytest --cov=gendiff --cov-report xml
 
 package-uninstall:
 	python3 -m pip uninstall  dist/*.whl
