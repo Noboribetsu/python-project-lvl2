@@ -26,7 +26,7 @@ def generate_diff(first_path, second_path):
             if first_file[key] == second_file[key]:
                 diff.append('    {0}: {1}'.format(
                     key, to_json(first_file[key])
-                    )
+                )
                 )
                 continue
             diff.append('  - {0}: {1}'.format(key, to_json(first_file[key])))
@@ -45,12 +45,12 @@ def gendiff():
     """
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.'
-        )
+    )
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument(
         '-f', '--format', help='set format of output', metavar='FORMAT'
-        )
+    )
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file)
     print(diff)
