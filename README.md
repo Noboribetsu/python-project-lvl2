@@ -10,3 +10,6 @@
 
 ## Step 5 progress(add yaml format support):
 [![asciicast](https://asciinema.org/a/ewyriF8csLUTxrn0uN1KQPoKy.svg)](https://asciinema.org/a/ewyriF8csLUTxrn0uN1KQPoKy)
+
+## Step 6 progress(add nested data support, add formater stylish(tree view))
+[![asciicast](https://asciinema.org/a/rPGuDnWdsaQZaXo52QR3Ebkj2.svg)](https://asciinema.org/a/rPGuDnWdsaQZaXo52QR3Ebkj2)
