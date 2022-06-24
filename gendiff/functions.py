@@ -39,6 +39,17 @@ def in_both(key, dict_1, dict_2):
             {}]
 
 
+def make_line(key, value, indent, depth):
+    if value[1] == []:
+        return STYLISH[value[0]].format(indent, key, stylish(
+            value[2], depth + 4)
+        )
+    if isinstance(value[1], list):
+        old_value = check_value(value[1][0], depth + 4, stylish)
+        new_value = check_value(value[1][1], depth + 4, stylish)
+        return STYLISH[value[0]].format(indent, key, old_value, new_value)
+
+
 def make_diff(dict_1, dict_2):
     diff = {}
     keys_diff = dict_2.keys() - dict_1.keys()
@@ -57,17 +68,9 @@ def stylish(diff, depth=0):
     result = []
     indent = ' ' * depth
     for key, value in sorted(diff.items()):
-        if value[1] == []:
-            line = STYLISH[value[0]].format(indent, key, stylish(
-                value[2], depth + 4)
-            )
-            result.append(line)
-        elif isinstance(value[1], list):
-            old_value = check_value(value[1][0], depth + 4, stylish)
-            new_value = check_value(value[1][1], depth + 4, stylish)
-            line = STYLISH[value[0]].format(indent, key, old_value, new_value)
-            result.append(line)
-        else:
+        if not isinstance(value[1], list):
             line = STYLISH[value[0]].format(indent, key, to_low(value[1]))
             result.append(line)
+        else:
+            result.append(make_line(key, value, indent, depth))
     return '{{\n{1}\n{0}}}'.format(indent, '\n'.join(result))
