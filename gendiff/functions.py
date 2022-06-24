@@ -24,7 +24,7 @@ def check_nested(key, type, arg1, arg2):
 
 
 def check_value(value, arg, function):
-    return function(value, arg) if isinstance(value, dict) else value
+    return function(value, arg) if isinstance(value, dict) else to_low(value)
 
 
 def make_diff(dict_1, dict_2):
@@ -60,12 +60,8 @@ def stylish(diff, depth=0):
             )
             result.append(line)
         elif isinstance(value[1], list):
-            old_value = to_low(
-                check_value(value[1][0], depth + 4, stylish)
-            )
-            new_value = to_low(
-                check_value(value[1][1], depth + 4, stylish)
-            )
+            old_value = check_value(value[1][0], depth + 4, stylish)
+            new_value = check_value(value[1][1], depth + 4, stylish)
             line = STYLISH[value[0]].format(indent, key, old_value, new_value)
             result.append(line)
         else:
