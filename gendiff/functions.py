@@ -27,6 +27,18 @@ def check_value(value, arg, function):
     return function(value, arg) if isinstance(value, dict) else to_low(value)
 
 
+def in_both(key, dict_1, dict_2):
+    if isinstance(dict_1[key], dict) and isinstance(dict_2[key], dict):
+        return ['nested', [], make_diff(dict_1[key], dict_2[key])]
+    if dict_1[key] == dict_2[key]:
+        return ['same', dict_1[key], {}]
+    return ['new_value', [
+            check_value(dict_1[key], {}, make_diff),
+            check_value(dict_2[key], {}, make_diff)
+            ],
+            {}]
+
+
 def make_diff(dict_1, dict_2):
     diff = {}
     keys_diff = dict_2.keys() - dict_1.keys()
@@ -36,17 +48,8 @@ def make_diff(dict_1, dict_2):
             diff[key] = check_nested(key, 'del_nested', dict_1, dict_2)
         elif key in dict_2 and key not in dict_1:
             diff[key] = check_nested(key, 'new_nested', dict_2, dict_1)
-        elif isinstance(dict_1[key], dict) and isinstance(dict_2[key], dict):
-            diff[key] = ['nested', [], make_diff(dict_1[key], dict_2[key])]
-        elif dict_1[key] == dict_2[key]:
-            diff[key] = ['same', dict_1[key], {}]
         else:
-            diff[key] = [
-                'new_value',
-                [check_value(dict_1[key], {}, make_diff),
-                    check_value(dict_2[key], {}, make_diff)],
-                {}
-            ]
+            diff[key] = in_both(key, dict_1, dict_2)
     return diff
 
 
