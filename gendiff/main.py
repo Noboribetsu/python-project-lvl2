@@ -1,4 +1,7 @@
-"""Main file with function"""
+"""
+Main file with CLI function and libary fucntion
+to compare two configuration files.
+"""
 import argparse
 from gendiff.functions import make_diff, parse_file, stylish
 
@@ -6,6 +9,7 @@ from gendiff.functions import make_diff, parse_file, stylish
 def generate_diff(first_path, second_path):
     """
     The fucntion compares two configuration files and shows a difference.
+    Libary function.
     """
     dict_1 = parse_file(first_path)
     dict_2 = parse_file(second_path)
