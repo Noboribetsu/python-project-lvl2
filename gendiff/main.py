@@ -13,7 +13,8 @@ def generate_diff(first_path, second_path):
     """
     dict_1 = parse_file(first_path)
     dict_2 = parse_file(second_path)
-    return make_diff(dict_1, dict_2)
+    diff = make_diff(dict_1, dict_2)
+    return stylish(diff)
 
 
 def gendiff():
@@ -27,8 +28,8 @@ def gendiff():
     parser.add_argument('second_file')
     parser.add_argument(
         '-f', '--format', help='set format of output',
-        metavar='FORMAT', default=stylish
+        metavar='FORMAT', default='stylish'
     )
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file)
-    print(args.format(diff))
+    print(diff)
