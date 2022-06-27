@@ -30,9 +30,14 @@ def check_nested(key, type, arg1, arg2):
     return ['same' if arg2 == {} else type, arg1[key], {}]
 
 
-def check_value(value, arg, function):
+def check_value(value, depth):
     """Normalize nested value for stylish function."""
-    return function(value, arg) if isinstance(value, dict) else to_low(value)
+    return stylish(value, depth) if isinstance(value, dict) else to_low(value)
+
+
+def isnested(value):
+    """Check if a new added value is nested or not"""
+    return make_diff(value, {}) if isinstance(value, dict) else value
 
 
 def in_both(key, dict_1, dict_2):
@@ -41,11 +46,7 @@ def in_both(key, dict_1, dict_2):
         return ['nested', [], make_diff(dict_1[key], dict_2[key])]
     if dict_1[key] == dict_2[key]:
         return ['same', dict_1[key], {}]
-    return ['new_value', [
-            check_value(dict_1[key], {}, make_diff),
-            check_value(dict_2[key], {}, make_diff)
-            ],
-            {}]
+    return ['new_value', [isnested(dict_1[key]), isnested(dict_2[key])], {}]
 
 
 def make_line(key, value, indent, depth):
@@ -55,8 +56,8 @@ def make_line(key, value, indent, depth):
             value[2], depth + 4)
         )
     if isinstance(value[1], list):
-        old_value = check_value(value[1][0], depth + 4, stylish)
-        new_value = check_value(value[1][1], depth + 4, stylish)
+        old_value = check_value(value[1][0], depth + 4)
+        new_value = check_value(value[1][1], depth + 4)
         return STYLISH[value[0]].format(indent, key, old_value, new_value)
 
 
