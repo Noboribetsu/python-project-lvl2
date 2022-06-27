@@ -13,3 +13,6 @@
 
 ## Step 6 progress(add nested data support, add formater stylish(tree view))
 [![asciicast](https://asciinema.org/a/rPGuDnWdsaQZaXo52QR3Ebkj2.svg)](https://asciinema.org/a/rPGuDnWdsaQZaXo52QR3Ebkj2)
+
+## Step 7 progress(add plain formater)
+[![asciicast](https://asciinema.org/a/J303sMzaALtfSkUVY8QaciEtq.svg)](https://asciinema.org/a/J303sMzaALtfSkUVY8QaciEtq)
