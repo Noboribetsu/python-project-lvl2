@@ -1,5 +1,3 @@
-from types import NoneType
-
 from gendiff.functions import to_low
 
 
@@ -13,7 +11,7 @@ PLAIN = {
 def plain_value(value):
     if value == [] or isinstance(value, dict):
         return '[complex value]'
-    elif isinstance(value, (bool, NoneType)):
+    elif isinstance(value, (bool, type(None))):
         return to_low(value)
     return "'{0}'".format(value)
 
