@@ -3,6 +3,7 @@ Main file with CLI function and libary fucntion
 to compare two configuration files.
 """
 import argparse
+from gendiff.formaters.json import json_output
 from gendiff.formaters.plain import plain
 from gendiff.formaters.stylish import stylish
 from gendiff.functions import make_diff, parse_file
@@ -20,6 +21,7 @@ def generate_diff(first_path, second_path, format_name='stylish'):
         return stylish(diff)
     elif format_name == 'plain':
         return plain(diff)
+    return json_output(diff)
 
 
 def gendiff():
@@ -32,9 +34,11 @@ def gendiff():
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument(
-        '-f', '--format', help='set format of output: stylish, \
+        '-f', '--format',
+        help='set format of output: stylish, \
         plain, json (default: stylish)',
-        metavar='FORMAT', default='stylish', choices=['stylish', 'plain']
+        metavar='FORMAT', default='stylish',
+        choices=['stylish', 'plain', 'json']
     )
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file, args.format)
