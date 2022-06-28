@@ -15,7 +15,9 @@ def to_low(value):
     Fuctions to_low bring a value to a correct while printing difference.
     Example: True(Python style) -> true(JSON, yaml style).
     """
-    return BOOL.get(value, value)
+    if isinstance(value, (bool, type(None))):
+        return BOOL.get(value, value)
+    return value
 
 
 def parse_file(file_path):
