@@ -10,22 +10,23 @@ def add_value(value):
 
 
 def make_line(indent, key, value, depth):
+    output = '{0}  "{1}": {2}'
     if value[0] in ['new', 'nested_value']:
         if value[2] == {}:
-            return '{0}  "{1}": {2}'.format(
+            return output.format(
                 indent, key, add_value(value[1])
             )
-        return '{0}  "{1}": {2}'.format(
+        return output.format(
             indent, key, json_output(value[2], depth + 2)
         )
     elif value[0] == 'new_value':
         if isinstance(value[1][1], dict):
-            return'{0}  "{1}": {2}'.format(
+            return output.format(
                 indent, key, json_output(value[1][1], depth + 2)
             )
-        return'{0}  "{1}": {2}'.format(indent, key, add_value(value[1][1]))
+        return output.format(indent, key, add_value(value[1][1]))
     elif value[0] == 'nested':
-        return'{0}  "{1}": {2}'.format(
+        return output.format(
             indent, key, json_output(value[2], depth + 2)
         )
 
