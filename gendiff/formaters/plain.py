@@ -13,7 +13,8 @@ def plain_value(value):
         return '[complex value]'
     elif isinstance(value, (bool, type(None))):
         return to_low(value)
-    return "'{0}'".format(value)
+    return '{0}'.format(value) \
+        if isinstance(value, int) else "'{0}'".format(value)
 
 
 def plain(diff, path=[]):
