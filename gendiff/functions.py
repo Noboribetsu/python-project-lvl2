@@ -32,10 +32,10 @@ def check_nested(key, type, arg1, arg2):
     """Check if a value is nested, make it plain"""
     if isinstance(arg1[key], dict):
         return [
-            '{0}_nested'.format(type) if arg2 == {} else type,
+            'nested_value' if arg2 == {} else type,
             [], make_diff(arg1[key], {})
         ]
-    return ['same' if arg2 == {} else type, arg1[key], {}]
+    return ['nested_value' if arg2 == {} else type, arg1[key], {}]
 
 
 def isnested(value):
