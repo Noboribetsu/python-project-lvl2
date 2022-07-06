@@ -16,3 +16,6 @@
 
 ## Step 7 progress(add plain formater)
 [![asciicast](https://asciinema.org/a/J303sMzaALtfSkUVY8QaciEtq.svg)](https://asciinema.org/a/J303sMzaALtfSkUVY8QaciEtq)
+
+## Step 8 progress(add json formater)
+[![asciicast](https://asciinema.org/a/wPEc20zmiJ1zrY1Ae67GtXNSZ.svg)](https://asciinema.org/a/wPEc20zmiJ1zrY1Ae67GtXNSZ)
